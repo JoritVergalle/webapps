@@ -31,7 +31,6 @@
 	<div class="reveal">
 
 		<div class="slides">
-			<!-- <section > data-background-iframe="info_background.htm" style='display: table;'> -->
 			<section>
 				<h3>What are we going to do?</h3>
 				<ul>
@@ -128,9 +127,6 @@
 			controls: false,
 			slideNumber: true,
 			dependencies: [
-				// { src: 'plugin/markdown/marked.js' },
-				// { src: 'plugin/markdown/markdown.js' },
-				// { src: 'plugin/notes/notes.js', async: true },
 				{
 					src: 'plugin/highlight/highlight.js', async: true, callback: function () {
 						hljs.initHighlightingOnLoad();
@@ -142,7 +138,6 @@
 				},
 				{ src: 'plugin/chartjs/Chart.min.js' },
 				{ src: 'plugin/chartjs/csv2chart.js' },
-				// { src: 'plugin/snap/snap.svg.js' },
 				{ src: 'plugin/fullscreen/fullscreen.js' }
 
 			],
@@ -168,35 +163,6 @@
 			},
 		});
 
-		// Reveal.addEventListener('snap-history', function () {
-		// 	var s = Snap("#svg");
-		// 	var bigCircle = s.circle(150, 150, 100);
-		// 	// By default its black, lets change its attributes
-		// 	bigCircle.attr({
-		// 		fill: "#bada55",
-		// 		stroke: "#000",
-		// 		strokeWidth: 5
-		// 	});
-		// 	// Now lets create another small circle:
-		// 	var smallCircle = s.circle(100, 150, 70);
-		// 	smallCircle.attr({
-		// 		visibility: "hidden",
-		// 		id: "snap-history-one"
-		// 	})
-		// 	// var fullRect = s.rect(0, 0, 1000, 1000);
-		// 	// fullRect.attr({
-		// 	// 	fill:"#ff0000"
-		// 	// })
-		// 	console.log(s.getBBox());
-		// }, false);
-		// Reveal.addEventListener('fragmentshown', function (event) {
-		// 	console.log(event.fragment);
-		// 	// event.fragment = the fragment DOM element
-		// 	if (event.fragment.getAttribute('id') == 'snap-history-1') {
-		// 		console.log($('snap-history-one'));
-		// 		$("snap-history-one").css('visibility','visible');
-		// 	}
-		// });
 	</script>
 </body>
 
