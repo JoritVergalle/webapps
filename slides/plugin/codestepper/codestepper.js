@@ -93,7 +93,6 @@ var CodeStepper = window.CodeStepper || (function () {
             // and add css to the inner span's
             toArray(event.fragment.getElementsByTagName('*')).forEach(el => {
                 if (el.classList.contains('samespot')) {
-                    console.log(el.childNodes);
                     for (let i = 0; i < el.childNodes.length;) {
                         if (el.childNodes[i].nodeType == 3) { // TEXT
                             // remove all the newlines that were used to add the different <span> childnodes
@@ -106,8 +105,6 @@ var CodeStepper = window.CodeStepper || (function () {
                             ++i;
                         }
                     }
-                    console.log("AFTER ")
-                    console.log(el.childNodes);
                 }
             });
             // loop again over the children (above loop changed the DOM), now simply remember all the 

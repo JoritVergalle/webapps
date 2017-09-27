@@ -4273,8 +4273,6 @@
 	 * @param {object} event
 	 */
 	function onDocumentKeyDown( event ) {
-		console.log(event);
-
 		// If there's a condition specified and it returns false,
 		// ignore this event
 		if( typeof config.keyboardCondition === 'function' && config.keyboardCondition() === false ) {
