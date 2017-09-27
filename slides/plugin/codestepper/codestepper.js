@@ -93,6 +93,7 @@ var CodeStepper = window.CodeStepper || (function () {
             // and add css to the inner span's
             toArray(event.fragment.getElementsByTagName('*')).forEach(el => {
                 if (el.classList.contains('samespot')) {
+                    console.log(el.childNodes);
                     for (let i = 0; i < el.childNodes.length;) {
                         if (el.childNodes[i].nodeType == 3) { // TEXT
                             // remove all the newlines that were used to add the different <span> childnodes
@@ -105,6 +106,8 @@ var CodeStepper = window.CodeStepper || (function () {
                             ++i;
                         }
                     }
+                    console.log("AFTER ")
+                    console.log(el.childNodes);
                 }
             });
             // loop again over the children (above loop changed the DOM), now simply remember all the 
@@ -119,7 +122,7 @@ var CodeStepper = window.CodeStepper || (function () {
                         showHide.get(nr).push(el);
                         maxIndex = nr > maxIndex ? nr : maxIndex;
                     });
-                    if (highlightFirstAppearanceInCodeBlocks && showRange.length) {
+                    if (!el.hasAttribute('no-highlight-first') && highlightFirstAppearanceInCodeBlocks && showRange.length) {
                         // see if we're inside a code tag
                         let insideCodeTag = false;
                         let pnode = el.parentNode;
@@ -154,10 +157,12 @@ var CodeStepper = window.CodeStepper || (function () {
                     78: innerNavigateNext,
                     39: innerNavigateNext,
                     76: innerNavigateNext,
+                    40: innerNavigateNext,
                     80: innerNavigatePrevious,
                     33: innerNavigatePrevious,
                     72: innerNavigatePrevious,
                     37: innerNavigatePrevious,
+                    38: innerNavigatePrevious
                 }
             });
         }
