@@ -1,40 +1,48 @@
 
 .reveal .slides section .highlight-red .hljs-keyword {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-meta {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-attr {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
+
+.reveal .slides section .highlight-red .hljs-attribute {
+    color: #fc82c5 ;
+    }
 .reveal .slides section .highlight-red .hljs-tag {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-comment {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-string {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-literal {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-number {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-built_in {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-template-variable {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-class {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-title {
-color: #ff2c2d ;
+color: #fc82c5 ;
 }
+.reveal .slides section .highlight-red .hljs-variable {
+    color: #fc82c5 ;
+    }
+    
 
 .reveal .slides section .highlight-green .hljs-keyword {
 color: #17ff2e !important;
@@ -45,6 +53,9 @@ color:#17ff2e;
 .reveal .slides section .highlight-green .hljs-attr {
 color:#17ff2e;
 }
+.reveal .slides section .highlight-green .hljs-attribute {
+    color:#17ff2e;
+    }
 .reveal .slides section .highlight-green .hljs-tag {
 color:#17ff2e;
 }
@@ -72,4 +83,6 @@ color:#17ff2e;
 .reveal .slides section .highlight-green .hljs-title {
 color:#17ff2e;
 }
-
+.reveal .slides section .highlight-green .hljs-variable {
+    color:#17ff2e;
+    }
