@@ -283,6 +283,7 @@ var RecipeSchema = new mongoose.Schema({
   ingredients: <span highlight-steps='3'>[</span>String<span highlight-steps='3'>]</span>,
   directions: <span highlight-steps='3'>[</span>String<span highlight-steps='3'>]</span>,</span>
 });	
+mongoose.model('Recipe', RecipeSchema);
 				  </code></pre>
           <div class='samespot'>
             <p show-steps='1'>we need Mongoose Schema's for each collection ('table') we want to represent</p>
@@ -684,7 +685,6 @@ export class Recipe {
           <div class='samespot'>
             <p show-steps='1'>you do this by providing a 'toJSON()' method in your class</p>
             <p show-steps='2'>make sure you return an object, not a string, and simply map the keys on the private members</p>
-            <p show-steps='3'><a href="http://localhost:4200/">let's try this</a></p>
           </div>
         </div>
       </section>
@@ -692,7 +692,7 @@ export class Recipe {
         <h3>http post</h3>
         <div class='fragment' code-step>
           <pre>src/app/recipe-data.service.ts<code data-noescape data-trim>
-addNewRecipe(rec): Observable<Recipe> {
+addNewRecipe(rec): Observable&lt;Recipe&gt; {
   return this.http.post(this._appUrl, <span highlight-steps='1'>rec</span>)
     .map(res => res.json()).<span highlight-steps='2-3'>map</span>(item =>
       new Recipe(item.name, item.ingredients, item.directions));
