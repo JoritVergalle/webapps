@@ -41,8 +41,11 @@ color: #fc82c5 ;
 }
 .reveal .slides section .highlight-red .hljs-variable {
     color: #fc82c5 ;
-    }
-    
+}
+.reveal .slides section .highlight-red .hljs-name {
+    color: #fc82c5 ;
+}
+         
 
 .reveal .slides section .highlight-green .hljs-keyword {
 color: #17ff2e !important;
@@ -55,7 +58,7 @@ color:#17ff2e;
 }
 .reveal .slides section .highlight-green .hljs-attribute {
     color:#17ff2e;
-    }
+}
 .reveal .slides section .highlight-green .hljs-tag {
 color:#17ff2e;
 }
@@ -85,4 +88,7 @@ color:#17ff2e;
 }
 .reveal .slides section .highlight-green .hljs-variable {
     color:#17ff2e;
-    }
+}
+.reveal .slides section .highlight-green .hljs-name {
+    color:#17ff2e;
+}

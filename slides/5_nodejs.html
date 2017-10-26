@@ -339,9 +339,9 @@ let Recipe = mongoose.model('Recipe');
           <pre>~/recipebackend/routes/index.js<code data-noescape data-trim>
 router.<span highlight-steps='2'>post</span>('/API/recipes/', function (req, res, next) {
   let recipe = new Recipe(<span highlight-steps='3'>req.body</span>);
-  recipe.<span highlight-steps='4'>save</span>(function(err, post) {
+  recipe.<span highlight-steps='4'>save</span>(function(err, rec) {
     if (err){ return next(err); }
-    <span highlight-steps='5'>res.json(recipe);</span>
+    <span highlight-steps='5'>res.json(rec);</span>
   });
 });    
           </code></pre>
@@ -480,8 +480,8 @@ export class RecipeDataService {
             <p show-steps='2'>@angular/http is the part of angular where all the http tools reside</p>
             <p show-steps='3'>we'll add the backend url, and we inject http in the constructor</p>
             <p show-steps='4'>and now for the real meat, PAY ATTENTION</p>
-            </div> 
-	</div>
+          </div>
+          </div>
       </section>
       <section class="gifsection" data-background-image="img/karate_kid.gif">
         <h2 class="giftext">this is what you were trained for!</h2>

@@ -92,6 +92,9 @@
   color: #fc82c5 ;
   } 
 
+  .reveal .slides section .fragment.highlight-current-red.current-fragment .hljs-name {
+    color: #fc82c5 ;
+    } 
 .reveal .gifsection {
   position: absolute !important;
   bottom:0px;
