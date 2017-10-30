@@ -124,7 +124,8 @@ export class AddRecipeComponent implements OnInit {<span show-steps='1-3'>
   }
   addRecipe(newRecipeName: HTMLInputElement): boolean {
     <span show-steps='1-3'>const recipe = new Recipe(newRecipeName.value);
-    this.newRecipe.emit(recipe);</span><span show-steps='4'>this._recipe.name = newRecipeName.value;</span>
+    </span><span show-steps='4'>this._recipe.name = newRecipeName.value;</span>
+    this.newRecipe.emit(<span show-steps='1-3'>recipe</span><span show-steps='4'>this._recipe</span>);
     return false;
   }
 }
@@ -134,7 +135,7 @@ export class AddRecipeComponent implements OnInit {<span show-steps='1-3'>
             <p show-steps='1'>out AddIngredientComponent from a few weeks ago was a poor excuse for a form, we'll turn it into a real one</p>
             <p show-steps='2'>we will gather all the data in a local variable, before we submit it to our service, so lets add that first</p>
             <p show-steps='3'>lets initialize it to some value, so that we can see two way data binding at work later</p>
-            <p show-steps='4'>and when the add button is clicked, for now we'll simply update our internal model, and no longer send an event</p>
+            <p show-steps='4'>our addRecipe function will then update this recipe object and emit it i.s.o. creating a new one</p>
           </div>
         </div>
       </section>
@@ -146,27 +147,21 @@ export class AddRecipeComponent implements OnInit {<span show-steps='1-3'>
   &lt;h3&gt;add recipe&lt;/h3&gt;
   &lt;div&gt;
     &lt;label for='name'&gt;name:&lt;/label&gt;
-    &lt;input type='text' id='name' <span show-steps='4-9'>value='{{recipe.name}}'</span>
+    &lt;input type='text' id='name' <span show-steps='4-7'>value='{{recipe.name}}'</span>
            name='name' <span highlight-steps='2'>#newrecipename</span>&gt;
-  &lt;/div&gt;<span show-steps='7-9'>
+  &lt;/div&gt;<span show-steps='5-7'>
   &lt;input ... #secondinput&gt;</span>
-  &lt;button <span highlight-steps='2'>(click)</span>='addRecipe(<span highlight-steps='3'>newrecipename</span><span show-steps='8-9'>, secondinput, ...</span>)'&gt;add&lt;/button&gt;
+  &lt;button <span highlight-steps='2'>(click)</span>='addRecipe(<span highlight-steps='3'>newrecipename</span><span show-steps='6-7'>, secondinput, ...</span>)'&gt;add&lt;/button&gt;
 &lt;/form&gt; 
-<span show-steps='5-9'>REMOVE LATER: {{ recipe | json }}</span>
           </code></pre>
           <div class='samespot'>
             <p show-steps='1'>this is the associated html we had, I removed all the css classes for clarity</p>
             <p show-steps='2'>our html used a DOM element variable and the click event of a button to process data entered in our form</p>
             <p show-steps='3'>getting the contents of the newrecipename variable inside our this.recipe is trivial, but we also want the reverse</p>
-            <p show-steps='4'>we actually already know how to do this, display data from a property into our html: we use {{ }}</p>
-            <p show-steps='5'>this should work, but as is it's hard to tell that it does, it's often useful to display the internal contents
-              of objects using the json pipe</p>
-            <p show-steps='6'>
-              <a href="http://localhost:4200/">let's try it out</a>
-            </p>
-            <p show-steps='7'>this works, but it doesn't scale very well, you'd have to add a DOM variable for each form element</p>
-            <p show-steps='8'>and then process them in one big function, juggling all those variables</p>
-            <p show-steps='9'>making this process transparent and easy, is what the NgForm directive is for</p>
+            <p show-steps='4'>we could simply use property binding and use the value attribute of an input tag to display data from a property into our html</p>
+            <p show-steps='5'>this works, but it doesn't scale very well, you'd have to add a DOM variable for each form element</p>
+            <p show-steps='6'>and then process them in one big function, juggling all those variables</p>
+            <p show-steps='7'>making this process transparent and easy, is what the NgForm directive is for</p>
 
           </div>
         </div>
@@ -303,7 +298,7 @@ REMOVE LATER:<span show-steps='3-8'> {{spy.className}}</span> {{ recipe | json }
         <ul>
           <li class="fragment">reactive forms are not fundamentally different, but instead of automatically generating the underlying formstructure which binds to ngModel, we'll have to do that ourselves </li>
           <li class="fragment">I already said every element inside a form is a FormControl, there is also a FormGroup and FormArray to structure these</li>
-          <li class="fragment">a FormControl is a clas that tracks the value and the validation status of an individual control of a form</li>
+          <li class="fragment">a FormControl is a class that tracks the value and the validation status of an individual control of a form</li>
           
         </ul>
       </section>
@@ -433,7 +428,7 @@ export class AddRecipeComponent implements OnInit {
         <h3>formbuilder</h3>
         <div class='fragment' code-step>
           <pre class='javascript'><code data-noescape data-trim>
-import { FormGroup, <span show-steps='1'>FormControl</span><span show-steps='2-4'>FromBuilder</span> } from '@angular/forms'; 
+import { FormGroup, <span show-steps='1'>FormControl</span><span show-steps='2-4'>FormBuilder</span> } from '@angular/forms'; 
 
 export class AddRecipeComponent implements OnInit {<span show-steps='2-4'>
   constructor(private fb: FormBuilder) { }
@@ -446,7 +441,7 @@ export class AddRecipeComponent implements OnInit {<span show-steps='2-4'>
 }
           </code></pre>
           <div class='samespot'>
-            <p show-steps='1'>there's an easier way to construct these FromGroups and controls, using a formbuilder</p>
+            <p show-steps='1'>there's an easier way to construct these FormGroups and controls, using a formbuilder</p>
             <p show-steps='2'>inject the FormBuilder in the constructor</p>
             <p show-steps='3'>and replace 'new FormGroup' with fb.group and 'new FormControl' with fb.control</p>
             <p show-steps='4'>you can even remove the fb.control completely, and replace it with an array which holds all the arguments (default value, validators, ...)</p>
