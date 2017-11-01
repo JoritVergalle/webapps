@@ -288,7 +288,7 @@ REMOVE LATER:<span show-steps='3-8'> {{spy.className}}</span> {{ recipe | json }
         <h3>template driven form summary</h3>
         <ul>
           <li class="fragment">make sure you include the FormsModule, which will apply the NgForm directive to your form's</li>
-          <li class="fragment">using [(ngForm)] directive it's easy to bind input fields to your own model, use (ngSubmit) to process the results</li>
+          <li class="fragment">using [(ngModel)] directive it's easy to bind input fields to your own model, use (ngSubmit) to process the results</li>
           <li class="fragment">validation is done by binding the #myVar='ngModel' and inspecting the 'valid' 'errors' etc. properties</li>
           <li class="fragment">you can do more complicated things, but then it's usually easier to use the reactive form approach</li>
         </ul>
@@ -654,7 +654,7 @@ export class Ingredient {
 }
           </code></pre>
           <div class='samespot'>
-            <p show-steps='1'>the ingredient model itself then has an id, name, and and ingredientunit</p>
+            <p show-steps='1'>the ingredient model itself then has an id, name, and an ingredientunit</p>
             <p show-steps='2'>a lot of getters and JSON converters are not shown here, but needed of course</p>
           </div>
         </div>
@@ -724,8 +724,8 @@ export class RecipeDataService {
         <h3>formarray</h3>
         <ul>
           <li class="fragment">finally, we're at our form, where we want to add one or more ingredients for a recipe, so we'll dynamically add input fields as we need them</li>
-          <li class="fragment">this is done usig a formarray</li>
-          <li class="fragment">you typically create function which creates a formgroup with the inputs you want to repeat</li>
+          <li class="fragment">this is done using a formarray</li>
+          <li class="fragment">you typically create a function which creates a formgroup with the inputs you want to repeat</li>
           <li class="fragment">and then push such a formgroup into the formarray whenever you want new input controls</li>
         </ul>
       </section>
@@ -733,7 +733,7 @@ export class RecipeDataService {
         <h3>add ingredient form</h3>
         <div class='fragment' code-step>
           <pre><code data-noescape data-trim>
-<span show-steps='3'>public readonly unitTypes = ['Liter', 'Gram', 'Tbsp'];</span>
+<span show-steps='3'>public readonly unitTypes = ['', 'Liter', 'Gram', 'Tbsp'];</span>
 ngOnInit() {
   this.recipe = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -834,7 +834,7 @@ export class AddRecipeComponent implements OnInit {
             <p show-steps='2'>but let's try something else, there is also change tracking available, we'll add a new line of input fields as the previous one is filled</p>
             <p show-steps='3'>first, add a convenience method to access the ingredients array inside the formgroup</p>
             <p show-steps='4'>then subscribe to the statusChanges, with a debounceTime of 400ms, and add a new set of input fields if the previous one proved 'valid'</p>
-            <p show-steps='5'>you could also use valueChanges for much more fine grained control, statusChanges if pretty blunt, but good enough for this purpose</p>
+            <p show-steps='5'>you could also use valueChanges for much more fine grained control, statusChanges is pretty blunt, but good enough for this purpose</p>
           </div>
         </div>
       </section>
@@ -869,8 +869,8 @@ export class AddRecipeComponent implements OnInit {
       <section>
         <h3>summary</h3>
         <ul>
-          <li class="fragment">we've seen how to build template drive and reactive forms</li>
-          <li class="fragment">we done validation and display error messages based on the state of our forms</li>
+          <li class="fragment">we've seen how to build template driven and reactive forms</li>
+          <li class="fragment">we've done validation and display error messages based on the state of our forms</li>
           <li class="fragment">we've seen how to dynamically create forms, and respond to changes in the form</li>
           <li class="fragment">there's still more, you can do server side validation too (we'll do that when we create users)</li>
           <li class="fragment">and you can construct custom validators, maybe we'll get back to that (no promises)</li>
