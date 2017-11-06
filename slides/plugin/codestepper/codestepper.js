@@ -12,6 +12,8 @@ var CodeStepper = window.CodeStepper || (function () {
     let highlight = {};
     let allHighlight = new Set();
 
+    let previousTop = -1;
+
     function toArray(o) {
         return Array.prototype.slice.call(o);
     }
@@ -38,6 +40,32 @@ var CodeStepper = window.CodeStepper || (function () {
         return result;
     }
 
+    // slides are centered vertically by once setting the 'top' style based
+    // on the scrollHeight / contentHeight, because I dynamically hide/show 
+    // elements this scrollHeight changes, but the top is not reapplied, 
+    // so I look for it here and set it correctly
+    function readjustTopOfSection(el) {
+        let p = el;
+        while (p && p.tagName != 'SECTION' ) {
+            if (p.parentNode) {
+              p = p.parentNode;
+            } else {
+              p = undefined;
+              break;
+            }
+        }
+        const newTop = (Reveal.getConfig().height - p.scrollHeight) / 2;
+        // only set if more than 30px difference (this is enough to not readjust for
+        // one extra line of text in explanation)
+        if (previousTop < 0 || (newTop - previousTop) > 30 || (previousTop - newTop) > 30) {
+            p.style.top = `${newTop}px`;
+            previousTop = newTop;
+        } else {
+            console.log(`prev ${previousTop}, new ${newTop}`);
+        }
+        
+    }
+
     function showHighlightCurrentIndex() {
         allShowHide.forEach(val => { 
             val.setAttribute('hidden', true);
@@ -45,6 +73,9 @@ var CodeStepper = window.CodeStepper || (function () {
         });
         if (showHide.get(currentIndex)) {
             showHide.get(currentIndex).forEach(val => val.removeAttribute('hidden'));
+            if (showHide.get(currentIndex).length) { 
+                readjustTopOfSection(showHide.get(currentIndex)[0]);
+            }
         }
         if (highlightFirstAppearanceInCodeBlocks && currentIndex != 1 && showFirstTime.get(currentIndex)) {
             showFirstTime.get(currentIndex).forEach(val => val.classList.add('highlight-green'));
@@ -53,6 +84,7 @@ var CodeStepper = window.CodeStepper || (function () {
         if (currentIndex in highlight) {
             highlight[currentIndex].forEach(val => val.classList.add('highlight-red'));
         }
+  
     }
 
     function innerNavigateNext() {
