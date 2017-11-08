@@ -326,10 +326,10 @@ imports: [
         <div class='fragment' code-step>
           <pre>src/app/add-recipe/add-recipe.component.ts<code data-noescape data-trim>
 export class AddRecipeComponent implements OnInit {
-  <span show-steps='2-3'>private myGroup: FormGroup;
+  <span show-steps='2-3'>private recipe: FormGroup;
 
   ngOnInit() {
-    this.myGroup = new FormGroup({
+    this.recipe = new FormGroup({
       name: new FormControl('risotto')
     })
   }</span>
@@ -346,42 +346,24 @@ export class AddRecipeComponent implements OnInit {
         <h3>add recipe</h3>
         <div class='fragment' code-step>
           <pre>src/app/add-recipe/add-recipe.component.ts<code data-noescape data-trim>
-&lt;form<span show-steps='2-4'> [formGroup]='myGroup'</span>&gt;
+&lt;form<span show-steps='2-6'> [formGroup]='recipe'</span><span show-steps='6'>(ngSubmit)='onSubmit()'</span>&gt;
   &lt;h3&gt;add recipe&lt;/h3&gt;
   &lt;div&gt;
     &lt;label for='name_id'&gt;name:&lt;/label&gt;
-    &lt;input type='text' id='name_id'<span show-steps='3-4'> formControlName='name'</span>&gt;
+    &lt;input type='text' id='name_id'<span show-steps='3-6'> formControlName='name'</span>&gt;
   &lt;/div&gt;
   &lt;button&gt;add&lt;/button&gt;
 &lt;/form&gt; 
+<span show-steps='4-6'>REMOVE {{ recipe.value | json }}</span>
           </code></pre>
           <div class='samespot'>
             <p show-steps='1'>now we need to link this to the html form</p>
             <p show-steps='2'>the formGroup is a binding on the form</p>
             <p show-steps='3'>and formControls are linked using the formControlName attribute directive</p>
-            <p show-steps='4'><a href="http://localhost:4200">let's try this out</a></p>
-          </div>
-        </div>
-      </section>
-      <section>
-        <h3>reactive form</h3>
-        <div class='fragment' code-step>
-            <pre>src/app/add-recipe/add-recipe.component.ts<code data-noescape data-trim>
-&lt;form [formGroup]='<span show-steps='1'>myGroup</span><span show-steps='2-4'>recipe</span>'<span show-steps='4'>(ngSubmit)='onSubmit()'</span>&gt;
-  &lt;h3&gt;add recipe&lt;/h3&gt;
-  &lt;div&gt;
-    &lt;label for='name_id'&gt;name:&lt;/label&gt;
-    &lt;input type='text' id='name_id' formControlName='name'</span>&gt;
-  &lt;/div&gt;
-  &lt;button&gt;add&lt;/button&gt;
-&lt;/form&gt; 
-<span show-steps='2-4'>REMOVE {{ recipe.value | json }} {{ recipe.valid }}</span>
-                          </code></pre>
-          <div class='samespot'>
-            <p show-steps='1'>myGroup represents all aspect of our recipe in the form, let's rename it to recipe</p>
-            <p show-steps='2'>now this will be our model object, we can both access value and valid just like before</p>
-            <p show-steps='3'><a href="http://localhost:4200">let's try this out</a></p>
-            <p show-steps='4'>we want the add button to work, nothing changed here, we still respond to the (ngSubmit) event</p>
+            <p show-steps='4'>for debugging purposes it's convenient to dump the value in the form itself</p>
+            <p show-steps='5'><a href="http://localhost:4200">let's try this out</a></p>
+            <p show-steps='6'>if we want the add button to work, we need respond to the (ngSubmit) event</p>
+            
           </div>
         </div>
       </section>
@@ -409,8 +391,8 @@ export class AddRecipeComponent implements OnInit {
 export class AddRecipeComponent implements OnInit {
   ngOnInit() {
     this.recipe = new FormGroup({
-      name: new FormControl('risotto'<span show-steps='2'>, Validators.required</span><span show-steps='3-5'>, 
-        [Validators.required, Validators.minLength(2)]</span>)
+      name: new FormControl('risotto'<span show-steps='2'>, Validators.required</span><span show-steps='3-4'>, 
+        [Validators.required, Validators.minLength(2)]</span><span show-steps='4'>, [ ... ]</span>)
     })
   }
 }
@@ -419,8 +401,39 @@ export class AddRecipeComponent implements OnInit {
             <p show-steps='1'>if you want to add validation, we'll explicitly include and add <a href="https://angular.io/api/forms/Validators">Validators</a> functions</p>
             <p show-steps='2'>Validators has many static functions defined which perform the validation</p>
             <p show-steps='3'>if you need multiple, simply pass an array of them</p>
-            <p show-steps='4'>properly showing error messages is done the same way is with template driven forms, so I'm not going to repeat it now</p>
-            <p show-steps='5'>the {{recipe.valid}} will suffice, <a href="http://localhost:4200">let's check this out</a></p>
+            <p show-steps='4'>you can also add async Validators (server side validation), I'll show an example when we add user authentication</p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h3>validators</h3>
+        <div class='fragment' code-step>
+          <pre class='html'><code data-noescape data-trim>
+&lt;form [formGroup]='recipe'(ngSubmit)='onSubmit()'&gt;
+  &lt;h3&gt;add recipe&lt;/h3&gt;
+  &lt;div&gt;
+    &lt;label for='name_id'&gt;name:&lt;/label&gt;
+    &lt;input type='text' id='name_id' formControlName='name' <span show-steps='2-7'>#spy</span>&gt;
+  &lt;/div&gt;
+  <span show-steps='5-7'>&lt;div *ngIf='recipe.get(&quot;name&quot;).errors?.required<span show-steps='6-7'>
+     &amp;&amp; recipe.get(&quot;name&quot;).touched</span>' 
+    class='ui pointing red basic label'&gt;
+    error! this is required
+  &lt;/div&gt;</span>
+  &lt;button&gt;add&lt;/button&gt;
+&lt;/form&gt; 
+REMOVE {{ recipe.value | json }} {{ recipe.valid }}
+<span show-steps='2-7'>{{ spy.className }}</span>
+<span show-steps='4-7'>{{ recipe.get("name").errors | json}}</span>
+          </code></pre>
+          <div class='samespot'>
+            <p show-steps='1'>if there are validators the FormControl will automatically add css classes to the control, which you can use to give feedback</p>
+            <p show-steps='2'>let's add a variable and <a href="http://localhost:4200/">see what this does</a></p>
+            <p show-steps='3'>you could add css based on these classes, but often you also need to show a proper error message</p>
+            <p show-steps='4'>whenever a validation error occurs, the FormControl.errors object contains those errors <a href="http://localhost:4200">let's check this out</a></p>
+            <p show-steps='5'>so you can add div's which are shown based on these properties, using a *ngIf construct</p>
+            <p show-steps='6'>it's better to take touched state into account, you don't want to bombard your user with errors when she opens a page</p>
+            <p show-steps='7'><a href="http://localhost:4200">let's try this out</a></p>
           </div>
         </div>
       </section>
@@ -876,16 +889,6 @@ export class AddRecipeComponent implements OnInit {
           <li class="fragment">and you can construct custom validators, maybe we'll get back to that (no promises)</li>
         </ul>
       </section>
-
-<!-- 
-      dan formarray,
-
-      ingredients
-
-      custom validator, server side validator
-
- -->
-
       <script src="lib/js/head.min.js"></script>
       <script src="js/reveal.js"></script>
       <script>
