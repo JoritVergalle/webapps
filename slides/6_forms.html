@@ -352,7 +352,7 @@ export class AddRecipeComponent implements OnInit {
     &lt;label for='name_id'&gt;name:&lt;/label&gt;
     &lt;input type='text' id='name_id'<span show-steps='3-6'> formControlName='name'</span>&gt;
   &lt;/div&gt;
-  &lt;button&gt;add&lt;/button&gt;
+  &lt;button <span show-steps='6'>type='submit'</span>&gt;add&lt;/button&gt;
 &lt;/form&gt; 
 <span show-steps='4-6'>REMOVE {{ recipe.value | json }}</span>
           </code></pre>
@@ -409,7 +409,7 @@ export class AddRecipeComponent implements OnInit {
         <h3>validators</h3>
         <div class='fragment' code-step>
           <pre class='html'><code data-noescape data-trim>
-&lt;form [formGroup]='recipe'(ngSubmit)='onSubmit()'&gt;
+&lt;form [formGroup]='recipe' (ngSubmit)='onSubmit()'&gt;
   &lt;h3&gt;add recipe&lt;/h3&gt;
   &lt;div&gt;
     &lt;label for='name_id'&gt;name:&lt;/label&gt;
@@ -420,7 +420,7 @@ export class AddRecipeComponent implements OnInit {
     class='ui pointing red basic label'&gt;
     error! this is required
   &lt;/div&gt;</span>
-  &lt;button&gt;add&lt;/button&gt;
+  &lt;button type='submit'&gt;add&lt;/button&gt;
 &lt;/form&gt; 
 REMOVE {{ recipe.value | json }} {{ recipe.valid }}
 <span show-steps='2-7'>{{ spy.className }}</span>
