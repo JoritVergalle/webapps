@@ -26,7 +26,7 @@ export class RecipeDataService {
   }
 
   addNewRecipe(rec): Observable<Recipe> {
-    return this.http.post(`${this._appUrl}/recipes`, rec)
+    return this.http.post(`${this._appUrl}/recipes`, rec, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
       .map(res => res.json()).map(item => Recipe.fromJSON(item));
   }
 
