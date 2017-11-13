@@ -1,0 +1,22 @@
+<form [formGroup]='recipe' (ngSubmit)='onSubmit()' class="ui large form segment error">
+  <h3 class="ui header">add recipe</h3>
+  <div class="field">
+    <label for="name_id">name:</label>
+    <input type="text" id="name_id" formControlName='name'>
+  </div>
+  <div class="field" formArrayName='ingredients'
+    *ngFor='let item of recipe.get("ingredients").controls; let i = index '>
+    <div [formGroupName] = 'i'>
+      <label for="ingredient_name">ingredient:</label>
+      <div class="three fields" >
+          <input type="text" id="ingredient_amount" formControlName='amount'>
+          <select id="ingredient_unittype" formControlName='unit'>
+            <option *ngFor='let type of unitTypes' [value]='type'>{{type}}</option>
+          </select>
+          <input type="text" id="ingredient_name" formControlName='ingredientname'>
+      </div>
+    </div>
+  </div>
+  <button type='submit' class="ui positive right floated button">add</button>
+</form>
+<!-- REMOVE {{ recipe.value | json }} {{ recipe.valid }} -->

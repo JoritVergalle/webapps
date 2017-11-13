@@ -1,0 +1,8 @@
+<div class="ui segment">
+  <h3 class="ui header">{{recipe?.name}} details</h3>
+<ul class='ui list'>
+  <li *ngFor="let ing of recipe?.ingredients">
+    <app-ingredient [ingredient]='ing'></app-ingredient>
+  </li>
+</ul>
+</div>

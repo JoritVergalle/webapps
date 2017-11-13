@@ -1,0 +1,4 @@
+<div class="ui grid ">
+  <app-recipe *ngFor="let localRecipe of recipes" [recipe]="localRecipe" (deleteRecipe)='removeRecipe($event)'>
+  </app-recipe>
+</div>
