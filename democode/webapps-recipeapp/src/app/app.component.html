@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="ui container">
+  <div class="ui three item menu">
+    <a class='item' routerLinkActive='active' routerLink="recipe/list" >Recipes</a>
+    <a class='item' routerLinkActive='active' routerLink="recipe/add" >Add Recipe</a>
+    <a *ngIf='(currentUser | async) else loginlink' class="item" routerLinkActive='active' routerLink="/logout">{{currentUser|async}}</a>
+    <ng-template #loginlink>
+      <a class="item" routerLinkActive='active' routerLink="/login">log in</a>
+    </ng-template>
+    <!-- <a class='item' routerLinkActive='active' routerLink="recipe-detail/59f9fa6ac8d04b07db83d790" >Recipe 1</a>
+    <a class='item' routerLinkActive='active' routerLink="recipe-detail/59f9f7b6c8d04b07db83d780" >Recipe 2</a> -->
+  </div>
+  <router-outlet></router-outlet>
+</div>
+<!-- <div class="ui container">
+  <app-add-recipe (newRecipe)='newRecipeAdded($event)'></app-add-recipe>
+ <app-recipe-list></app-recipe-list>
+</div>	 -->
+
+
